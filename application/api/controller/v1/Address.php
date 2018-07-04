@@ -65,7 +65,7 @@ class Address extends BaseController
         }
         $userAddress = $user->address;
         // 根据规则取字段是很有必要的，防止恶意更新非客户端字段
-        $data = $validate->getDataByRule(input('post.'));
+        $data = $validate->getDataByRule(input('post.'));//获取客户端所有请求
         if (!$userAddress )
         {
             // 关联属性不存在，则新建

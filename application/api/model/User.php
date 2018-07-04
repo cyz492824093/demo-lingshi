@@ -16,7 +16,7 @@ class User extends BaseModel
 
     public function address()
     {
-        return $this->hasOne('UserAddress', 'user_id', 'id');
+        return $this->hasOne('UserAddress', 'user_id', 'id');//外键在useraddress上所以得用hasone
     }
 
     /**

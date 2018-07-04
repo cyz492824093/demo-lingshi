@@ -25,7 +25,7 @@ class Theme extends BaseModel
     public function topicImg()
     {
         //这里得id指image
-        return $this->belongsTo('Image', 'topic_img_id', 'id');
+        return $this->belongsTo('Image', 'topic_img_id', 'id');//id指的是image的id
     }
 
     public function headImg()
@@ -38,6 +38,7 @@ class Theme extends BaseModel
      */
     public function products()
     {
+        //Product指product模型，theme_product因为没有建立模型所以是表名,theme_product是一张中间表
         return $this->belongsToMany(
             'Product', 'theme_product', 'product_id', 'theme_id');
     }

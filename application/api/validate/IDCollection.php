@@ -17,7 +17,7 @@ class IDCollection extends BaseValidate
     protected $rule = [
 
         'ids' => 'require|checkIDs'
-    ];
+    ];//checkIDs自定义校验函数
 
     protected $message = [
         'ids' => 'ids参数必须为以逗号分隔的多个正整数,仔细看文档啊'

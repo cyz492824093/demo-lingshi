@@ -11,7 +11,7 @@
 use think\Route;
 
 //Sample
-Route::get('api/:version/sample/:key', 'api/:version.Sample/getSample');
+Route::get('api/:version/sample/:key', 'api/:version.Sample/getSample');//加“：”是动态写入
 Route::post('api/:version/sample/test3', 'api/:version.Sample/test3');
 
 //Miss 404

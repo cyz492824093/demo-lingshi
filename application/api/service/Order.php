@@ -169,9 +169,10 @@ class Order
     // 根据订单查找真实商品
     private function getProductsByOrder($oProducts)
     {
+
         $oPIDs = [];
         foreach ($oProducts as $item) {
-            array_push($oPIDs, $item['product_id']);
+            array_push($oPIDs, $item['product_id']);//通过product_id字段查找
         }
         // 为了避免循环查询数据库
         $products = Product::all($oPIDs)
@@ -198,6 +199,7 @@ class Order
     // 如果预扣除了库存量需要队列支持，且需要使用锁机制
     private function createOrderByTrans($snap)
     {
+        Db::startTrans();//增加一个事务保证写数据的完整性
         try {
             $orderNo = $this->makeOrderNo();
             $order = new OrderModel();
@@ -219,12 +221,14 @@ class Order
             }
             $orderProduct = new OrderProduct();
             $orderProduct->saveAll($this->oProducts);
+            Db::commit();
             return [
                 'order_no' => $orderNo,
                 'order_id' => $orderID,
                 'create_time' => $create_time
             ];
         } catch (Exception $ex) {
+            Db::rollback();//事务回滚就是删除写了一半的数据
             throw $ex;
         }
     }

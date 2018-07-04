@@ -6,9 +6,9 @@ use think\Model;
 
 class Banner extends BaseModel
 {
-    public function items()
+    public function items()//关联函数
     {
-        return $this->hasMany('BannerItem', 'banner_id', 'id');
+        return $this->hasMany('BannerItem', 'banner_id', 'id');//'id'指的是当前模型banner的主键id
     }
     //
 

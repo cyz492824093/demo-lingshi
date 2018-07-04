@@ -104,15 +104,15 @@ class Product extends Controller
         (new Count())->goCheck();
         //$products  是数据集由数据库配置文件配置得
         $products = ProductModel::getMostRecent($count);
-        if ($products->isEmpty())//因为￥products是对象不能直接$products
+        if ($products->isEmpty())//因为$products是对象不能直接$products
         {
-
+            throw new ProductException();
         }
         $products = $products->hidden(
             [
                 'summary'
             ])
-            ->toArray();
+            ->toArray();//因为product是对象可以用方法临时隐藏，为什么不在product模型里面去隐藏summary,因为别的地方可能用到summary
         return $products;
     }
 
